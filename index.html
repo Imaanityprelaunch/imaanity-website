@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Imaanity — Your Digital Sanctuary for Spiritual Growth</title>
+    <meta name="description" content="Discover Imaanity, the all-in-one Muslim wellness app for daily reflection, guided journaling, and habit tracking. Join the waitlist for early access to a calmer, more connected spiritual life.">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles & Configuration -->
+    <style>
+        :root {
+            --brand-green: #0f3e0e;
+            --brand-green-light: #e7f0e7;
+            --bg-soft: #FCFBF8;
+            --text-dark: #1a1a1a;
+            --text-muted: #525252;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-soft);
+            color: var(--text-dark);
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230f3e0e' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        .text-brand-green { color: var(--brand-green); }
+        .bg-brand-green { background-color: var(--brand-green); }
+        .border-brand-green { border-color: var(--brand-green); }
+        
+        /* --- Scroll Animation --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.6s ease-out;
+        }
+        .reveal-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Custom Focus Ring --- */
+        .focus-ring:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px var(--brand-green-light);
+            border-color: var(--brand-green);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- HEADER & HERO SECTION -->
+    <header id="home" class="relative text-center py-24 md:py-40 px-6">
+        <div class="max-w-3xl mx-auto">
+            <h1 class="font-serif text-5xl md:text-7xl font-bold text-brand-green reveal">Imaanity</h1>
+            <p class="mt-4 text-xl md:text-2xl text-muted font-light reveal" style="transition-delay: 150ms;">
+                Driven by integrity, uplifted by humanity.
+            </p>
+            <div class="mt-10 reveal" style="transition-delay: 300ms;">
+                <a href="#signup" class="bg-brand-green text-white font-bold py-4 px-10 rounded-full text-lg shadow-lg hover:shadow-xl hover:opacity-90 transition-all duration-300 transform hover:-translate-y-1 inline-block">
+                    Get Early Access
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- ABOUT & PILLARS SECTION -->
+        <section id="about" class="py-20 md:py-28 px-6">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center max-w-3xl mx-auto reveal">
+                    <h2 class="font-serif text-4xl md:text-5xl font-bold text-gray-900">A Sanctuary Built For You</h2>
+                    <p class="mt-4 text-lg text-muted leading-relaxed">
+                        In a fragmented digital world, finding a single, trusted space for spiritual nourishment is a challenge. Imaanity brings everything you need into one beautiful, ad-free, and Halal-by-design experience.
+                    </p>
+                </div>
+                
+                <div class="mt-20 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 text-center">
+                    <!-- Pillar 1: The Library -->
+                    <div class="reveal" style="transition-delay: 100ms;">
+                        <div class="flex items-center justify-center h-20 w-20 rounded-full bg-brand-green-light text-brand-green mx-auto mb-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+                        </div>
+                        <h3 class="font-serif text-2xl font-semibold">The Library</h3>
+                        <p class="mt-2 text-muted">A curated collection of Qur'anic verses, Hadith, powerful Duas, and guided reflections for your daily inspiration.</p>
+                    </div>
+
+                    <!-- Pillar 2: The Journal -->
+                    <div class="reveal" style="transition-delay: 200ms;">
+                        <div class="flex items-center justify-center h-20 w-20 rounded-full bg-brand-green-light text-brand-green mx-auto mb-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" /></svg>
+                        </div>
+                        <h3 class="font-serif text-2xl font-semibold">The Journal</h3>
+                        <p class="mt-2 text-muted">A private, secure space to pen your thoughts, track your gratitude, and set intentions, guided by thoughtful prompts.</p>
+                    </div>
+                    
+                    <!-- Pillar 3: The Hub -->
+                    <div class="reveal" style="transition-delay: 300ms;">
+                        <div class="flex items-center justify-center h-20 w-20 rounded-full bg-brand-green-light text-brand-green mx-auto mb-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <h3 class="font-serif text-2xl font-semibold">The Hub</h3>
+                        <p class="mt-2 text-muted">Stay consistent with your Deen goals using our Habit Tracker and monitor your progress with the Purity Tracker.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INTERACTIVE QUIZ SECTION -->
+        <section id="quiz" class="py-20 md:py-28 px-6 bg-white">
+            <div class="max-w-2xl mx-auto text-center reveal">
+                <h2 class="font-serif text-4xl font-bold text-gray-900">Test Your Wisdom</h2>
+                <p class="mt-3 text-lg text-muted">A small taste of the enriching content within Imaanity. Can you answer 3 correctly?</p>
+
+                <div id="quiz-container" class="mt-12 p-8 bg-gray-50 rounded-2xl shadow-sm border border-gray-200 text-left">
+                    <div id="quiz-content">
+                        <p id="quiz-question" class="text-xl font-medium text-center h-20 flex items-center justify-center"></p>
+                        <div id="quiz-answers" class="grid grid-cols-1 gap-4 mt-6"></div>
+                    </div>
+                    <div id="quiz-result" class="hidden">
+                        <p id="result-text" class="text-2xl font-serif font-bold text-center text-brand-green"></p>
+                        <p id="result-desc" class="mt-2 text-center text-muted"></p>
+                        <div class="mt-8 text-center">
+                            <button id="play-again-btn" class="bg-brand-green text-white font-bold py-3 px-8 rounded-full shadow-lg hover:opacity-90 transition-opacity">
+                                Play Again
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FINAL CTA & SIGNUP FORM SECTION -->
+        <section id="signup" class="bg-brand-green py-20 md:py-28 px-6">
+            <div class="max-w-2xl mx-auto text-center reveal">
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-white">Be The First to Find Your Peace</h2>
+                <p class="mt-4 text-lg text-white/80 leading-relaxed">
+                    Join the Imaanity waitlist and get exclusive early access. Your journey towards a more mindful, spiritually connected life begins soon, Insha'Allah.
+                </p>
+                <div class="mt-10 max-w-lg mx-auto">
+                    <div id="form-container">
+                        <form id="waitlist-form" name="imaanity-waitlist" method="POST" data-netlify="true" class="flex flex-col sm:flex-row gap-3">
+                            <input type="hidden" name="form-name" value="imaanity-waitlist" />
+                            <input type="email" name="email" placeholder="Your email address" required
+                                   class="flex-grow w-full px-5 py-4 text-base text-gray-800 bg-white border border-gray-300 rounded-full transition-shadow duration-300 focus-ring shadow-sm" />
+                            <button type="submit" class="bg-white text-brand-green font-bold text-base py-4 px-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5">
+                                Join the Waitlist
+                            </button>
+                        </form>
+                        <p class="text-sm text-white/60 mt-4">We promise to only send updates about Imaanity. Your privacy is sacred.</p>
+                    </div>
+                     <!-- Thank You Message -->
+                    <div id="thank-you-msg" class="hidden p-6 bg-white/20 rounded-lg">
+                        <h3 class="font-serif text-2xl font-bold text-white">JazakAllah Khair!</h3>
+                        <p class="text-white/90 mt-2">You're on the list! We can't wait to share our creation with you.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SOCIAL PROOF / TESTIMONIALS (Placeholder) -->
+        <!-- 
+        <section class="py-20 md:py-28 px-6 text-center">
+            <div class="max-w-3xl mx-auto reveal">
+                <h2 class="font-serif text-3xl font-bold text-gray-900">Praised by Early Believers</h2>
+                <div class="mt-8">
+                    <blockquote class="text-xl text-muted italic">
+                        "Imaanity has been a blessing. It's the calm in my digital storm. I finally feel more connected and at peace throughout my day."
+                    </blockquote>
+                    <p class="mt-4 font-semibold text-gray-800">- Fatima A.</p>
+                </div>
+            </div>
+        </section>
+        -->
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="text-center py-10 px-6 border-t border-gray-200">
+        <p class="text-sm text-muted">
+            © 2025 Imaanity. All Rights Reserved. A sanctuary built with respect for your privacy and our shared values.
+        </p>
+        <!-- Add social links here if needed -->
+    </footer>
+
+    <!-- ANALYTICS SNIPPET (Placeholder) -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA_ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'YOUR_GA_ID');
+    </script> -->
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // --- Intersection Observer for Scroll Animations ---
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal-visible');
+                    // Optional: unobserve after revealing to save resources
+                    // observer.unobserve(entry.target); 
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => observer.observe(el));
+
+
+        // --- Waitlist Form Submission ---
+        const waitlistForm = document.getElementById('waitlist-form');
+        const formContainer = document.getElementById('form-container');
+        const thankYouMsg = document.getElementById('thank-you-msg');
+
+        waitlistForm.addEventListener('submit', e => {
+            e.preventDefault();
+            const formData = new FormData(waitlistForm);
+            fetch("/", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams(formData).toString()
+            })
+            .then(() => {
+                formContainer.classList.add('hidden');
+                thankYouMsg.classList.remove('hidden');
+            })
+            .catch(error => alert('An error occurred. Please try again.'));
+        });
+
+
+        // --- Interactive Quiz Logic ---
+        const quizContainer = document.getElementById('quiz-container');
+        const quizContent = document.getElementById('quiz-content');
+        const quizQuestionEl = document.getElementById('quiz-question');
+        const quizAnswersEl = document.getElementById('quiz-answers');
+        const quizResultEl = document.getElementById('quiz-result');
+        const resultTextEl = document.getElementById('result-text');
+        const resultDescEl = document.getElementById('result-desc');
+        const playAgainBtn = document.getElementById('play-again-btn');
+
+        const allQuestions = [
+            { q: "What does the word 'Islam' mean?", a: ["Peace", "Submission", "Faith"], correct: 1 },
+            { q: "Which of the five pillars involves fasting during Ramadan?", a: ["Shahada", "Salah", "Sawm"], correct: 2 },
+            { q: "The cube-shaped building in Mecca, towards which Muslims pray, is called the...?", a: ["Kaaba", "Al-Aqsa", "Haram"], correct: 0 },
+            { q: "What is the term for the charity that is obligatory for Muslims?", a: ["Sadaqah", "Zakat", "Waqf"], correct: 1 },
+            { q: "Which Prophet is known for his patience through immense trials?", a: ["Prophet Yusuf (AS)", "Prophet Ayyub (AS)", "Prophet Yunus (AS)"], correct: 1 },
+            { q: "The night of Power, considered the holiest night in Islam, is called...?", a: ["Laylat al-Qadr", "Laylat al-Miraj", "Eid al-Fitr"], correct: 0 },
+            { q: "How many chapters, or 'Surahs', are in the Qur'an?", a: ["114", "99", "100"], correct: 0 }
+        ];
+
+        let currentQuestions = [];
+        let score = 0;
+        let questionIndex = 0;
+
+        function startQuiz() {
+            score = 0;
+            questionIndex = 0;
+            currentQuestions = [...allQuestions].sort(() => 0.5 - Math.random()).slice(0, 3);
+            
+            quizResultEl.classList.add('hidden');
+            quizContent.classList.remove('hidden');
+
+            displayNextQuestion();
+        }
+
+        function displayNextQuestion() {
+            if (questionIndex >= currentQuestions.length) {
+                showResult();
+                return;
+            }
+            
+            const question = currentQuestions[questionIndex];
+            quizQuestionEl.textContent = question.q;
+            quizAnswersEl.innerHTML = '';
+
+            question.a.forEach((answer, index) => {
+                const button = document.createElement('button');
+                button.textContent = answer;
+                button.className = 'w-full text-left p-4 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:border-brand-green transition-colors duration-200';
+                button.onclick = () => selectAnswer(index === question.correct, button);
+                quizAnswersEl.appendChild(button);
+            });
+        }
+
+        function selectAnswer(isCorrect, button) {
+            // Disable all buttons after selection
+            const buttons = quizAnswersEl.querySelectorAll('button');
+            buttons.forEach(btn => btn.disabled = true);
+
+            if (isCorrect) {
+                score++;
+                button.className += ' bg-brand-green-light border-brand-green text-brand-green font-semibold';
+            } else {
+                button.className += ' bg-red-100 border-red-400 text-red-700 font-semibold';
+            }
+
+            setTimeout(() => {
+                questionIndex++;
+                displayNextQuestion();
+            }, 1000);
+        }
+
+        function showResult() {
+            quizContent.classList.add('hidden');
+            quizResultEl.classList.remove('hidden');
+
+            if (score === 3) {
+                resultTextEl.textContent = "Masha'Allah! Perfect Score!";
+                resultDescEl.textContent = "You have a strong foundation of knowledge. You'll love the enriching content in Imaanity.";
+            } else {
+                resultTextEl.textContent = `You got ${score} out of 3.`;
+                resultDescEl.textContent = "Every step in learning is a blessing. Continue your journey with Imaanity.";
+            }
+            
+            // Add a stronger CTA in the quiz results
+            const ctaLink = document.createElement('a');
+            ctaLink.href = '#signup';
+            ctaLink.className = 'inline-block mt-4 text-brand-green font-semibold hover:underline';
+            ctaLink.textContent = 'Enjoyed this? Join the waitlist for more →';
+            if (resultDescEl.nextElementSibling?.tagName !== 'A') {
+                resultDescEl.insertAdjacentElement('afterend', ctaLink);
+            }
+        }
+
+        playAgainBtn.addEventListener('click', startQuiz);
+        
+        // Initial start
+        startQuiz();
+    });
+    </script>
+</body>
+</html>
