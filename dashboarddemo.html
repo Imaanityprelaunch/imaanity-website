@@ -1,1 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imaanity App Demo</title>
 
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* Global Styles & Animations */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        body { font-family: 'Poppins', sans-serif; color: #ffffff; background-color: #1A3A25; }
+        .page-container { min-height: 100vh; }
+        .animate-fade-in { animation: fadeIn 0.6s ease-out forwards; }
+
+        /* Welcome Page Styles */
+        .welcome-choice-btn { background-color: rgba(255, 255, 255, 0.08); transition: background-color 0.3s ease; }
+        .welcome-choice-btn:hover { background-color: rgba(255, 255, 255, 0.15); }
+        .name-input { background-color: transparent; border-bottom: 2px solid rgba(255, 255, 255, 0.3); text-align: center; }
+        .name-input::placeholder { color: rgba(255, 255, 255, 0.5); }
+        .name-input:focus { outline: none; border-bottom-color: white; }
+        .continue-btn { background-color: white; color: #1A3A25; transition: transform 0.2s ease; }
+        .continue-btn:hover { transform: translateY(-2px); }
+
+        /* General Card Styles */
+        .hub-card, .menu-card {
+            background-color: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.25rem; transition: all 0.3s ease-in-out; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .hub-card:hover { transform: scale(1.05); background-color: rgba(255, 255, 255, 0.1); }
+        .menu-card:hover { transform: translateY(-5px); background-color: rgba(255, 255, 255, 0.1); }
+
+         /* Journal Textarea Style */
+        .journal-textarea { background-color: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.2); }
+        .journal-textarea:focus { outline: none; border-color: white; background-color: rgba(255, 255, 255, 0.1); }
+    </style>
+</head>
+<body class="pb-28"> <!-- Increased padding-bottom for nav bar */ -->
+
+    <!-- ========================================================================= -->
+    <!-- WELCOME PAGE CONTAINER                                                  -->
+    <!-- ========================================================================= -->
+    <div id="welcome-container" class="page-container flex items-center justify-center p-4">
+        <!-- All welcome steps are here, code is minimized for brevity -->
+        <div class="w-full max-w-md text-center">
+            <div id="step-mood" class="space-y-8 animate-fade-in"> <div><h1 class="text-3xl lg:text-4xl font-light">Assalamualaikum 🌿</h1><p class="text-xl mt-2">Welcome to Imaanity</p></div> <div><p class="text-lg mb-4">How’s your day going?</p><div class="flex justify-center items-center gap-4 flex-wrap"><button class="welcome-choice-btn text-4xl p-3 rounded-full" data-mood="good">😍</button><button class="welcome-choice-btn text-4xl p-3 rounded-full" data-mood="good">😃</button><button class="welcome-choice-btn text-4xl p-3 rounded-full" data-mood="ok">😊</button><button class="welcome-choice-btn text-4xl p-3 rounded-full" data-mood="ok">😐</button><button class="welcome-choice-btn text-4xl p-3 rounded-full" data-mood="bad">😞</button></div></div></div>
+            <div id="step-response" class="hidden animate-fade-in"><p id="response-message" class="text-xl lg:text-2xl leading-relaxed mb-8"></p><button id="continue-response-btn" class="continue-btn font-bold py-3 px-8 rounded-full">Continue</button></div>
+            <div id="step-name" class="hidden animate-fade-in"><h2 class="text-2xl lg:text-3xl font-semibold mb-6">And what's your name?</h2><div class="flex flex-col items-center gap-6"><input type="text" id="name-input-field" placeholder="Type your name here" class="name-input w-full max-w-xs p-2 text-2xl"><button id="continue-name-btn" class="continue-btn font-bold py-3 px-8 rounded-full">Continue</button></div></div>
+            <div id="step-gender" class="hidden animate-fade-in"><h2 class="text-2xl lg:text-3xl font-semibold mb-6">Are you a brother or a sister?</h2><div class="grid grid-cols-1 sm:grid-cols-2 gap-4"><button class="welcome-choice-btn text-xl font-semibold py-8 rounded-2xl" onclick="completeOnboarding('brother')">Brother</button><button class="welcome-choice-btn text-xl font-semibold py-8 rounded-2xl" onclick="completeOnboarding('sister')">Sister</button></div></div>
+        </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- HUB DASHBOARD CONTAINER                                                 -->
+    <!-- ========================================================================= -->
+    <div id="hub-container" class="page-container hidden">
+        <main class="p-6 md:p-8 animate-fade-in">
+            <header class="mb-10"><h1 id="hub-greeting" class="text-3xl font-light">Welcome back, <span class="font-medium">User</span> 🌸</h1><p id="hub-title" class="text-lg text-white/70 mt-1">Your Hub</p></header>
+            <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Library Card -->
+                <a href="#" onclick="navigateTo('library')" class="hub-card block p-6 text-center"><div class="flex items-center justify-center h-20 w-20 mx-auto bg-white/10 rounded-full mb-4"><span class="text-4xl">📚</span></div><h2 class="text-xl font-semibold">Library</h2><p class="text-sm text-white/70 mt-1">5-minute Islamic reads</p></a>
+                <!-- Journal Card: Updated to trigger navigation -->
+                <a href="#" onclick="navigateTo('journal')" class="hub-card block p-6 text-center"><div class="flex items-center justify-center h-20 w-20 mx-auto bg-white/10 rounded-full mb-4"><span class="text-4xl">📝</span></div><h2 class="text-xl font-semibold">Journal</h2><p class="text-sm text-white/70 mt-1">Gratitude + Reflection</p></a>
+                <!-- Tools Card: Container will be filled by JS -->
+                <div id="tools-card-container"></div>
+            </section>
+        </main>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- LIBRARY PAGE CONTAINER                                                  -->
+    <!-- ========================================================================= -->
+    <div id="library-container" class="page-container hidden">
+        <main class="p-6 md:p-8 animate-fade-in">
+            <header class="flex items-center justify-between mb-8"><button onclick="navigateTo('hub')" class="p-2 -ml-2 rounded-full hover:bg-white/10"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg></button><div class="text-center"><h1 class="text-2xl font-semibold">The Library</h1><p class="text-md text-white/70">Nourishment for your soul.</p></div><div class="w-6"></div></header>
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <a href="#" class="menu-card flex items-center p-4 gap-4"><div class="flex-shrink-0 bg-white/10 p-3 rounded-lg"><span class="text-2xl">☀️</span></div><div><h3 class="font-semibold">Morning Adhkar</h3><p class="text-sm text-white/70">Start your day with remembrance.</p></div></a>
+                <a href="#" class="menu-card flex items-center p-4 gap-4"><div class="flex-shrink-0 bg-white/10 p-3 rounded-lg"><span class="text-2xl">🌙</span></div><div><h3 class="font-semibold">Evening Adhkar</h3><p class="text-sm text-white/70">End your day with peace.</p></div></a>
+                <a href="#" class="menu-card flex items-center p-4 gap-4"><div class="flex-shrink-0 bg-white/10 p-3 rounded-lg"><span class="text-2xl">🤲</span></div><div><h3 class="font-semibold">Dua for Stress</h3><p class="text-sm text-white/70">Find relief in supplication.</p></div></a>
+                <a href="#" class="menu-card flex items-center p-4 gap-4"><div class="flex-shrink-0 bg-white/10 p-3 rounded-lg"><span class="text-2xl">📖</span></div><div><h3 class="font-semibold">Lessons from Surah Yusuf</h3><p class="text-sm text-white/70">On patience and trust in Allah.</p></div></a>
+            </section>
+        </main>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- JOURNAL PAGE CONTAINER (New)                                            -->
+    <!-- ========================================================================= -->
+    <div id="journal-container" class="page-container hidden">
+        <main class="p-6 md:p-8 animate-fade-in">
+            <header class="flex items-center justify-between mb-8"><button onclick="navigateTo('hub')" class="p-2 -ml-2 rounded-full hover:bg-white/10"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg></button><h1 class="text-2xl font-semibold">My Journal</h1><div class="w-6"></div></header>
+            <section class="space-y-6">
+                <div>
+                    <label for="journal-entry" class="block text-lg text-white/80 mb-2">What are you grateful for today?</label>
+                    <textarea id="journal-entry" rows="6" class="journal-textarea w-full rounded-xl p-4" placeholder="Bismillah, today I felt..."></textarea>
+                    <button class="w-full mt-4 continue-btn font-bold py-3 px-8 rounded-full">Save Entry</button>
+                </div>
+                <div class="border-t border-white/10 pt-6">
+                    <h2 class="text-xl font-semibold mb-4">Past Entries</h2>
+                    <div class="space-y-4">
+                        <a href="#" class="menu-card block p-4"><p class="font-semibold">October 25, 2023</p><p class="text-sm text-white/70 truncate">Grateful for the rain and a warm cup of tea...</p></a>
+                        <a href="#" class="menu-card block p-4"><p class="font-semibold">October 24, 2023</p><p class="text-sm text-white/70 truncate">A difficult conversation went well today, Alhamdulillah...</p></a>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- PURITY TRACKER PAGE CONTAINER (New)                                     -->
+    <!-- ========================================================================= -->
+    <div id="purity-container" class="page-container hidden">
+        <main class="p-6 md:p-8 animate-fade-in">
+            <header class="flex items-center justify-between mb-8"><button onclick="navigateTo('hub')" class="p-2 -ml-2 rounded-full hover:bg-white/10"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg></button><h1 class="text-2xl font-semibold">Purity Tracker</h1><div class="w-6"></div></header>
+            <section class="space-y-8">
+                <div class="text-center p-6 bg-white/5 rounded-2xl">
+                    <p class="text-white/70">Current Status</p>
+                    <p id="purity-status" class="text-3xl font-bold text-green-300">Pure (Tayyibah)</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <button class="continue-btn text-lg font-semibold py-6 rounded-2xl">Log Start of Cycle</button>
+                    <button class="continue-btn opacity-60 text-lg font-semibold py-6 rounded-2xl">Log End of Cycle</button>
+                </div>
+                <div class="border-t border-white/10 pt-6">
+                    <h2 class="text-xl font-semibold mb-4">History</h2>
+                    <div class="space-y-2 text-sm text-white/80">
+                        <p>October 15, 2023 - Cycle Ended</p>
+                        <p>October 10, 2023 - Cycle Started</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 p-4 bg-yellow-900/40 text-yellow-200 rounded-lg text-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    <p>Privacy Disclaimer: All data is stored securely on your device and is never shared.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- FIXED BOTTOM NAVIGATION BAR                                             -->
+    <!-- ========================================================================= -->
+    <nav id="bottom-nav" class="fixed bottom-0 left-0 right-0 p-4 bg-black/20 backdrop-blur-sm border-t border-white/10 hidden">
+        <div class="max-w-md mx-auto flex justify-around items-center">
+            <a href="#" onclick="navigateTo('hub')" id="nav-home" class="flex flex-col items-center text-center text-white"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" /></svg><span class="text-xs mt-1">Home</span></a>
+            <a href="#" onclick="navigateTo('journal')" id="nav-journal" class="flex flex-col items-center text-center text-white/60 hover:text-white"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg><span class="text-xs mt-1">Journal</span></a>
+            <a href="#" onclick="navigateTo('library')" id="nav-library" class="flex flex-col items-center text-center text-white/60 hover:text-white"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg><span class="text-xs mt-1">Library</span></a>
+            <a href="#" class="flex flex-col items-center text-center text-white/60 hover:text-white"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg><span class="text-xs mt-1">Profile</span></a>
+        </div>
+    </nav>
+
+    <script>
+        // --- PAGE ELEMENTS & LOGIC ---
+        const pageContainers = document.querySelectorAll('.page-container');
+        const bottomNav = document.getElementById('bottom-nav');
+        
+        document.addEventListener('DOMContentLoaded', () => {
+             // Welcome Flow Logic
+            const stepMood = document.getElementById('step-mood'); const stepResponse = document.getElementById('step-response'); const stepName = document.getElementById('step-name'); const stepGender = document.getElementById('step-gender'); const responseMessageEl = document.getElementById('response-message'); const continueResponseBtn = document.getElementById('continue-response-btn'); const nameInput = document.getElementById('name-input-field'); const continueNameBtn = document.getElementById('continue-name-btn');
+            function transitionTo(hide, show) { hide.classList.add('hidden'); show.classList.remove('hidden'); show.classList.add('animate-fade-in'); }
+            stepMood.querySelectorAll('[data-mood]').forEach(b => b.addEventListener('click', () => { const mood = b.dataset.mood; let msg = ''; switch(mood) { case 'good': msg = "Alhamdulillah! Happy you're having a good day. Let's capture it in your journal."; break; case 'ok': msg = "Every day is a new beginning. Let's find our center together."; break; case 'bad': msg = "It's okay to not be okay. Let's journal our thoughts and turn to Allah."; break; } responseMessageEl.textContent = msg; transitionTo(stepMood, stepResponse); }));
+            continueResponseBtn.addEventListener('click', () => transitionTo(stepResponse, stepName) & nameInput.focus()); continueNameBtn.addEventListener('click', () => { if (nameInput.value.trim()){ transitionTo(stepName, stepGender); } else { alert('Please enter your name.'); }}); nameInput.addEventListener('keypress', e => (e.key === 'Enter') && continueNameBtn.click());
+        });
+
+        function completeOnboarding(gender) {
+            const userName = document.getElementById('name-input-field').value;
+            // Update Hub content
+            document.getElementById('hub-greeting').innerHTML = `Welcome back, <span class="font-medium">${userName}</span> 🌸`;
+            document.getElementById('hub-title').textContent = (gender === 'sister') ? "Sister's Hub" : "Brother's Hub";
+            
+            // Create the correct "Tools" card with the correct navigation link
+            let toolsCardHTML = (gender === 'sister') 
+                ? `<a href="#" onclick="navigateTo('purity')" class="hub-card block p-6 text-center"><div class="flex items-center justify-center h-20 w-20 mx-auto bg-white/10 rounded-full mb-4"><span class="text-4xl">⚙️</span></div><h2 class="text-xl font-semibold">Tools</h2><p class="text-sm text-white/70 mt-1">Purity Tracker</p></a>` 
+                : `<a href="#" class="hub-card block p-6 text-center"><div class="flex items-center justify-center h-20 w-20 mx-auto bg-white/10 rounded-full mb-4"><span class="text-4xl">⚙️</span></div><h2 class="text-xl font-semibold">Tools</h2><p class="text-sm text-white/70 mt-1">Deen Habit Tracker</p></a>`;
+            document.getElementById('tools-card-container').innerHTML = toolsCardHTML;
+            navigateTo('hub');
+        }
+
+        function navigateTo(pageId) {
+            // Hide all pages
+            pageContainers.forEach(container => container.classList.add('hidden'));
+            // Show the target page
+            document.getElementById(`${pageId}-container`).classList.remove('hidden');
+            // Show the nav bar unless we're on the welcome screen
+            bottomNav.classList.toggle('hidden', pageId === 'welcome');
+            
+            // Update active state of bottom nav
+            const navItems = {
+                home: document.getElementById('nav-home'), library: document.getElementById('nav-library'), journal: document.getElementById('nav-journal')
+            };
+            Object.values(navItems).forEach(item => item?.classList.replace('text-white', 'text-white/60'));
+            
+            if (pageId === 'hub') navItems.home?.classList.replace('text-white/60', 'text-white');
+            if (pageId === 'library') navItems.library?.classList.replace('text-white/60', 'text-white');
+            if (pageId === 'journal') navItems.journal?.classList.replace('text-white/60', 'text-white');
+            
+             // Scroll to top on page change
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
