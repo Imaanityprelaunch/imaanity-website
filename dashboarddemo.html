@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Imaanity</title>
+
+    <!-- Tailwind CSS for rapid, responsive styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Poppins for a clean, minimal, rounded look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- INLINE STYLES & CUSTOMIZATIONS -->
+    <style>
+        /* Define a simple fadeIn animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- THEME COLORS (You can edit these) --- */
+        :root {
+            --bg-dark-green: #1A3A25; /* Darker, more intimate green */
+            --text-white: #ffffff;
+        }
+
+        /* Base styles for the entire page */
+        body {
+            background-color: var(--bg-dark-green);
+            color: var(--text-white);
+            font-family: 'Poppins', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Class to apply the animation to elements */
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        /* Styling for the large choice buttons (Emojis, Brother/Sister) */
+        .choice-btn {
+            background-color: rgba(255, 255, 255, 0.08);
+            transition: background-color 0.3s ease;
+        }
+        .choice-btn:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Styling for the text input field */
+        .name-input {
+            background-color: transparent;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            text-align: center;
+            font-size: 1.5rem;
+            color: var(--text-white);
+        }
+        .name-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .name-input:focus {
+            outline: none;
+            border-bottom-color: var(--text-white);
+        }
+
+        /* Styling for the continue button */
+        .continue-btn {
+            background-color: var(--text-white);
+            color: var(--bg-dark-green); /* Button text color matches background */
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .continue-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    <!-- Main container for the onboarding flow -->
+    <div id="onboarding-container" class="w-full max-w-md text-center">
+
+        <!-- STEP 1: Mood Selection -->
+        <div id="step-mood" class="space-y-8 animate-fade-in">
+            <div>
+                <h1 class="text-3xl lg:text-4xl font-light">Assalamualaikum 🌿</h1>
+                <p class="text-xl mt-2">Welcome to Imaanity</p>
+            </div>
+            <div>
+                <p class="text-lg mb-4">How’s your day going?</p>
+                <div class="flex justify-center items-center gap-4 flex-wrap">
+                    <!-- Added data-mood attribute to determine the response -->
+                    <button class="choice-btn text-4xl p-3 rounded-full" data-mood="great">😍</button>
+                    <button class="choice-btn text-4xl p-3 rounded-full" data-mood="good">😃</button>
+                    <button class="choice-btn text-4xl p-3 rounded-full" data-mood="ok">😊</button>
+                    <button class="choice-btn text-4xl p-3 rounded-full" data-mood="meh">😐</button>
+                    <button class="choice-btn text-4xl p-3 rounded-full" data-mood="bad">😞</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 2: Custom Response (Initially Hidden) -->
+        <div id="step-response" class="hidden animate-fade-in">
+            <p id="response-message" class="text-xl lg:text-2xl leading-relaxed mb-8"></p>
+            <button id="continue-response-btn" class="continue-btn font-bold py-3 px-8 rounded-full">Continue</button>
+        </div>
+
+        <!-- STEP 3: Name Input (Initially Hidden) -->
+        <div id="step-name" class="hidden animate-fade-in">
+            <h2 class="text-2xl lg:text-3xl font-semibold mb-6">And what's your name?</h2>
+            <div class="flex flex-col items-center gap-6">
+                <input type="text" id="name-input-field" placeholder="Type your name here" class="name-input w-full max-w-xs p-2 focus:ring-0">
+                <button id="continue-name-btn" class="continue-btn font-bold py-3 px-8 rounded-full">Continue</button>
+            </div>
+        </div>
+
+        <!-- STEP 4: Gender Selection (Initially Hidden) -->
+        <div id="step-gender" class="hidden animate-fade-in">
+            <h2 class="text-2xl lg:text-3xl font-semibold mb-6">Are you a brother or a sister?</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <button class="choice-btn text-xl font-semibold py-8 rounded-2xl" onclick="selectGender('brother')">Brother</button>
+                <button class="choice-btn text-xl font-semibold py-8 rounded-2xl" onclick="selectGender('sister')">Sister</button>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get references to all the step containers
+            const stepMood = document.getElementById('step-mood');
+            const stepResponse = document.getElementById('step-response');
+            const stepName = document.getElementById('step-name');
+            const stepGender = document.getElementById('step-gender');
+            
+            // Get references to interactive elements
+            const responseMessageEl = document.getElementById('response-message');
+            const continueResponseBtn = document.getElementById('continue-response-btn');
+            const nameInput = document.getElementById('name-input-field');
+            const continueNameBtn = document.getElementById('continue-name-btn');
+
+            // --- Function to handle transitions between steps ---
+            function transitionTo(hideElement, showElement) {
+                hideElement.classList.add('hidden');
+                showElement.classList.remove('hidden');
+                showElement.classList.add('animate-fade-in');
+            }
+
+            // --- Event Listeners ---
+
+            // 1. Listen for clicks on any of the mood emojis
+            stepMood.querySelectorAll('[data-mood]').forEach(button => {
+                button.addEventListener('click', () => {
+                    const mood = button.dataset.mood;
+                    let message = '';
+
+                    // --- EDIT YOUR CUSTOM MESSAGES HERE ---
+                    switch (mood) {
+                        case 'great':
+                        case 'good':
+                            message = "Alhamdulillah! We're so happy you're having a good day. Let's capture this feeling of gratitude in your journal.";
+                            break;
+                        case 'ok':
+                        case 'meh':
+                            message = "Every day is a new beginning. Let's take a moment to reflect and find our center together.";
+                            break;
+                        case 'bad':
+                            message = "It's okay to not be okay. Imaanity is a safe space. Let's take a moment to journal thoughts and turn to Allah.";
+                            break;
+                    }
+                    
+                    responseMessageEl.textContent = message;
+                    transitionTo(stepMood, stepResponse);
+                });
+            });
+
+            // 2. Listen for a click on the "Continue" button after the custom response
+            continueResponseBtn.addEventListener('click', () => {
+                transitionTo(stepResponse, stepName);
+                nameInput.focus(); // Automatically focus the input field for the user
+            });
+
+            // 3. Listen for a click on the "Continue" button after entering a name
+            continueNameBtn.addEventListener('click', () => {
+                if (nameInput.value.trim() === '') {
+                    alert('Please enter your name.');
+                    return;
+                }
+                transitionTo(stepName, stepGender);
+            });
+
+            // Optional: Allow pressing "Enter" in the name field to continue
+            nameInput.addEventListener('keypress', (event) => {
+                if (event.key === 'Enter') {
+                    continueNameBtn.click();
+                }
+            });
+        });
+
+        // --- Final step function ---
+        function selectGender(gender) {
+            const userName = document.getElementById('name-input-field').value;
+            
+            console.log(`User Name: ${userName}`);
+            console.log(`Selected Gender: ${gender}`);
+            alert(`Thank you, ${userName}!\nRedirecting you to the ${gender}'s hub...`);
+
+            // In a real app, you would redirect here:
+            // window.location.href = `/${gender}-hub.html`;
+        }
+    </script>
+</body>
+</html
